@@ -86,3 +86,8 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+
+// Dynamic themes
+// --------------------------------------------------
+@import "theme.light";
+@import "theme.dark";

@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons end *ngIf="!inEditMode">
+      <button ion-button icon-only (click)="onEdit()">
+        <ion-icon name="create"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end *ngIf="inEditMode">
+      <button ion-button icon-only (click)="onEditOk()" color="secondary">
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="onCancel()" color="danger">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{ place.title }}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-grid>
+    <ion-row *ngIf="inEditMode">
+      <ion-col>
+        <ion-item>
+          <ion-label floating>Title</ion-label>
+          <ion-input type="text" required [(ngModel)]="place.title"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Latitude</ion-label>
+          <ion-input type="number" required [(ngModel)]="place.location.lat"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Longitude</ion-label>
+          <ion-input type="number" required [(ngModel)]="place.location.lng"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <agm-map [latitude]="+place.location.lat" [longitude]="+place.location.lng" [zoom]=16>
+          <agm-marker [latitude]="+place.location.lat" [longitude]="+place.location.lng"></agm-marker>
+        </agm-map>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="!inEditMode">
+      <button ion-button block (click)="onDismiss()">Dismiss</button>
+    </ion-row>
+  </ion-grid>
+</ion-content>

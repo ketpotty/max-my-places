@@ -1,14 +1,54 @@
 <ion-header>
   <ion-navbar>
+    <ion-buttons end *ngIf="!isMultiSelect">
+      <button ion-button icon-only (click)="onLoadNewPlace()" color="secondary">
+        <ion-icon name="add"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="onRemove()" [disabled]="places.length == 0" color="danger">
+        <ion-icon name="trash"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="onSync()">
+        <ion-icon name="sync"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end *ngIf="isMultiSelect">
+      <button ion-button icon-only (click)="onAllSelect()">
+        <ion-icon [name]="allSelectIcon + '-outline'"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="onRemoveOk()" [disabled]="countSelected() === 0" color="danger">
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="onCancel()" color="secondary">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end *ngIf="!isMultiSelect">
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>
-      Ionic Blank
+      Awsome Places
     </ion-title>
   </ion-navbar>
 </ion-header>
-
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-list>
+    <ion-item
+      *ngFor="let place of places | orderby:'title'"
+      (click)="onOpenPlace(place)">
+      <ion-label>{{ place.title }}</ion-label>
+      <ion-checkbox *ngIf="isMultiSelect" [(ngModel)]="checkItems[place.title]"></ion-checkbox>
+    </ion-item>
+  </ion-list>
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="onRefresh()">
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+    </ion-buttons>
+    Version V{{ version }} | <a href="https://ng4-guide-max01.firebaseio.com/my-places" target="_blank">Firebase DB</a>
+  </ion-toolbar>
+</ion-footer>

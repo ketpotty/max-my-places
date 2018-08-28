@@ -33,3 +33,8 @@ $RECYCLE.BIN/
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
+my-release-key.keystore
+*.cmd
+npm_list.txt
+_work
+_save

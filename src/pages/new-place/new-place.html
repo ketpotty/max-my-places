@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Add place</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <form (ngSubmit)="onAddPlace(f.value)" #f="ngForm">
+          <ion-item>
+            <ion-label floating>Title</ion-label>
+            <ion-input type="text" name="title" ngModel required></ion-input>
+          </ion-item>
+          <button ion-button block type="submit" [disabled]="!f.valid || queryInProgress" color="secondary">Add Place</button>
+        </form>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button ion-button block (click)="onLocateUser()" *ngIf="!queryInProgress">Locate me</button>
+        <ion-spinner name="dots" *ngIf="queryInProgress"></ion-spinner>
+        <agm-map [latitude]="location.lat" [longitude]="location.lng" [zoom]=16 *ngIf="hasLocation && !hasError && !queryInProgress">
+          <agm-marker [latitude]="location.lat" [longitude]="location.lng"></agm-marker>
+        </agm-map>
+        <ion-item text-wrap color="danger" *ngIf="hasError">
+          Error retrieving GPS data: {{ errorMessage }}
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

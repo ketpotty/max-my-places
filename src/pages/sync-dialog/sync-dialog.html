@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons end *ngIf="isSyncProgressing">
+      <button ion-button icon-only (click)="onDismiss()" [disabled]="!hasError" color="danger">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Synchronizing data</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-item block>
+    <h2 text-center *ngIf="!hasError">{{ syncStatus }}</h2>
+    <ion-item text-wrap color="danger" *ngIf="hasError">{{ syncStatus }}</ion-item>
+    <ion-spinner name="dots"></ion-spinner>
+  </ion-item>
+</ion-content>

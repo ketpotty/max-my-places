@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="onSave()" color="secondary">
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="onCancel()" color="danger">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Settings</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-list>
+    <ion-list-header no-padding no-margin><h2 no-margin padding-top>General options</h2></ion-list-header>
+    <ion-item>
+      <ion-label>Use dark theme</ion-label>
+      <ion-toggle [(ngModel)]="optGenDarkTheme"></ion-toggle>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-list-header no-padding no-margin><h2 no-margin padding-top>Synchronization options</h2></ion-list-header>
+    <ion-item-divider no-padding>Upload</ion-item-divider>
+    <ion-item>
+      <ion-label>Add items on server</ion-label>
+      <ion-toggle [(ngModel)]="optSyncUpAdd"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Replace items on server</ion-label>
+      <ion-toggle [(ngModel)]="optSyncUpReplace"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Remove items on server</ion-label>
+      <ion-toggle [(ngModel)]="optSyncUpRemove"></ion-toggle>
+    </ion-item>
+    <ion-item-divider no-padding>Download</ion-item-divider>
+    <ion-item>
+      <ion-label>Add items locally</ion-label>
+      <ion-toggle [(ngModel)]="optSyncDownAdd"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Replace items locally</ion-label>
+      <ion-toggle [(ngModel)]="optSyncDownReplace"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Remove items locally</ion-label>
+      <ion-toggle [(ngModel)]="optSyncDownRemove"></ion-toggle>
+    </ion-item>
+  </ion-list>
+</ion-content>
